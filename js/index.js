@@ -82,7 +82,8 @@ var app = {
 				 ble.startNotification(app.deviceId, blue.serviceUUID, blue.characteristicUUID, app.onData, app.onError);
                 sendButton.dataset.deviceId = app.deviceId;
                 disconnectButton.dataset.deviceId = app.deviceId;
-               // app.showDetailPage();
+               // app.showDetailPage
+			   macDiv.innerHTML = app.deviceId;
             };
 
         ble.connect(app.deviceId, onConnect, app.onError);
