@@ -39,6 +39,7 @@ var blue= {
 };
 
 var app = {
+	deviceId: "",
     initialize: function() {
         this.bindEvents();
         //detailPage.hidden = true;
@@ -74,16 +75,17 @@ var app = {
         deviceList.appendChild(listItem);
     },
     connect: function(e) {
-        var deviceId = e.target.dataset.deviceId,
+		 app.deviceId = e.target.dataset.deviceId;
+        //var deviceId = e.target.dataset.deviceId,
             onConnect = function() {
                 // subscribe for incoming data
-				 ble.startNotification(deviceId, blue.serviceUUID, blue.characteristicUUID, app.onData, app.onError);
-                sendButton.dataset.deviceId = deviceId;
-                disconnectButton.dataset.deviceId = deviceId;
+				 ble.startNotification(app.deviceId, blue.serviceUUID, blue.characteristicUUID, app.onData, app.onError);
+                sendButton.dataset.deviceId = app.deviceId;
+                disconnectButton.dataset.deviceId = app.deviceId;
                // app.showDetailPage();
             };
 
-        ble.connect(deviceId, onConnect, app.onError);
+        ble.connect(app.deviceId, onConnect, app.onError);
     },
     onData: function(data) { // data received from Arduino
         console.log(data);
@@ -91,14 +93,13 @@ var app = {
         resultDiv.scrollTop = resultDiv.scrollHeight;
     },
 	buttonOn: function(event){
-		sendData("1");
+		app.sendData("1");
 	},
 	buttonOff: function(event){
-		sendData("0");
+		app.sendData("0");
 	},
 	sendData: function(msg) { // send data to Arduino
-	    var data = messageInput.value;
-		if(data =="1")
+	   
         var success = function() {
             console.log("success");
            resultDiv.innerHTML = resultDiv.innerHTML + "Sent: " + msg + "<br/>";
@@ -110,14 +111,14 @@ var app = {
         };
 
         var data = stringToBytes(msg);
-        var deviceId = event.target.dataset.deviceId;
-        ble.writeWithoutResponse(deviceId, blue.serviceUUID, blue.characteristicUUID, data, success, failure);
+       // var deviceId = event.target.dataset.deviceId;
+        ble.writeWithoutResponse(app.deviceId, blue.serviceUUID, blue.characteristicUUID, data, success, failure);
 
     },
 	
     disconnect: function(event) {
-        var deviceId = event.target.dataset.deviceId;
-        ble.disconnect(deviceId, app.showMainPage, app.onError);
+        //var deviceId = event.target.dataset.deviceId;
+        ble.disconnect(app.deviceId, app.showMainPage, app.onError);
     },
     showMainPage: function() {
       //  mainPage.hidden = false;
