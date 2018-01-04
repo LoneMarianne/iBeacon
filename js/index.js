@@ -90,30 +90,30 @@ var app = {
         resultDiv.innerHTML = resultDiv.innerHTML + "Received: " + bytesToString(data) + "<br/>";
         resultDiv.scrollTop = resultDiv.scrollHeight;
     },
-	 writeData: function(buffer, success, failure) { // to to be sent to MetaWear
+	 sendDataON: function(event) { // send data to Arduino
+	    var msg ="";
+		if(onButton.value=="ON"){
+			msg ="1";
+			onButton.value =="OFF";
+		}
+		else{
+			msg ="0";
+			onButton.value =="ON";
+		}
+        var success = function() {
+            console.log("success");
+            resultDiv.innerHTML = resultDiv.innerHTML + "Sent: " + msg + "<br/>";
+            resultDiv.scrollTop = resultDiv.scrollHeight;
+        };
 
-        if (!success) {
-            success = function() {
-                console.log("success");
-                resultDiv.innerHTML = resultDiv.innerHTML + "Sent: " + JSON.stringify(new Uint8Array(buffer)) + "<br/>";
-                resultDiv.scrollTop = resultDiv.scrollHeight;
-            };
-        }
-
-        if (!failure) {
-            failure = app.onError;
-        }
+        var failure = function() {
+            alert("Failed writing data to the Arduino");
+        };
 
         var data = stringToBytes(messageInput.value);
         var deviceId = event.target.dataset.deviceId;
         ble.writeWithoutResponse(deviceId, blue.serviceUUID, blue.characteristicUUID, data, success, failure);
-    },
-    
-	sendDataOFF: function(event) {
-                app.writeData("0");
-    },
-	sendDataON: function(event) {
-                app.writeData("1");
+
     },
 	
 	
