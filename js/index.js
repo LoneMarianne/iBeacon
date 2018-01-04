@@ -91,18 +91,10 @@ var app = {
         resultDiv.scrollTop = resultDiv.scrollHeight;
     },
 	 sendDataON: function(event) { // send data to Arduino
-	    var msg ="";
-		if(onButton.value=="ON"){
-			msg ="1";
-			onButton.value =="OFF";
-		}
-		else{
-			msg ="0";
-			onButton.value =="ON";
-		}
+	    
         var success = function() {
             console.log("success");
-            resultDiv.innerHTML = resultDiv.innerHTML + "Sent: " + msg + "<br/>";
+            resultDiv.innerHTML = resultDiv.innerHTML + "Sent: " + "1" + "<br/>";
             resultDiv.scrollTop = resultDiv.scrollHeight;
         };
 
@@ -116,7 +108,23 @@ var app = {
 
     },
 	
-	
+	sendDataOFF: function(event) { // send data to Arduino
+	    
+        var success = function() {
+            console.log("success");
+            resultDiv.innerHTML = resultDiv.innerHTML + "Sent: " + "0" + "<br/>";
+            resultDiv.scrollTop = resultDiv.scrollHeight;
+        };
+
+        var failure = function() {
+            alert("Failed writing data to the Arduino");
+        };
+
+        var data = stringToBytes(messageInput.value);
+        var deviceId = event.target.dataset.deviceId;
+        ble.writeWithoutResponse(deviceId, blue.serviceUUID, blue.characteristicUUID, data, success, failure);
+
+    },
 	
     disconnect: function(event) {
         var deviceId = event.target.dataset.deviceId;
