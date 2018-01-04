@@ -92,10 +92,10 @@ var app = {
     },
 	buttonOn: function(event){
 		sendData("1");
-	}
-	buttonOn: function(event){
+	},
+	buttonOff: function(event){
 		sendData("0");
-	}
+	},
 	sendData: function(msg) { // send data to Arduino
 	    var data = messageInput.value;
 		if(data =="1")
