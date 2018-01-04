@@ -102,7 +102,7 @@ var app = {
             alert("Failed writing data to the Arduino");
         };
 
-        var data = stringToBytes(messageInput.value);
+        var data = stringToBytes("1");
         var deviceId = event.target.dataset.deviceId;
         ble.writeWithoutResponse(deviceId, blue.serviceUUID, blue.characteristicUUID, data, success, failure);
 
@@ -120,7 +120,7 @@ var app = {
             alert("Failed writing data to the Arduino");
         };
 
-        var data = stringToBytes(messageInput.value);
+        var data = stringToBytes("0");
         var deviceId = event.target.dataset.deviceId;
         ble.writeWithoutResponse(deviceId, blue.serviceUUID, blue.characteristicUUID, data, success, failure);
 
