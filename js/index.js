@@ -46,8 +46,8 @@ var app = {
     bindEvents: function() {
         document.addEventListener('deviceready', this.onDeviceReady, false);
         refreshButton.addEventListener('touchstart', this.refreshDeviceList, false);
-        onButton.addEventListener('click', this.sendDataON, false);
-		  offButton.addEventListener('click', this.sendDataOFF, false);
+        onButton.addEventListener('click', this.buttonOn, false);
+		 offButton.addEventListener('click', this.buttonOff, false);
         disconnectButton.addEventListener('touchstart', this.disconnect, false);
         deviceList.addEventListener('touchstart', this.connect, false); // assume not scrolling
     },
@@ -90,11 +90,18 @@ var app = {
         resultDiv.innerHTML = resultDiv.innerHTML + "Received: " + bytesToString(data) + "<br/>";
         resultDiv.scrollTop = resultDiv.scrollHeight;
     },
-	 sendDataON: function(event) { // send data to Arduino
-	    
+	buttonOn: function(event){
+		sendData("1");
+	}
+	buttonOn: function(event){
+		sendData("0");
+	}
+	sendData: function(msg) { // send data to Arduino
+	    var data = messageInput.value;
+		if(data =="1")
         var success = function() {
             console.log("success");
-            resultDiv.innerHTML = resultDiv.innerHTML + "Sent: " + "1" + "<br/>";
+           resultDiv.innerHTML = resultDiv.innerHTML + "Sent: " + msg + "<br/>";
             resultDiv.scrollTop = resultDiv.scrollHeight;
         };
 
@@ -102,25 +109,7 @@ var app = {
             alert("Failed writing data to the Arduino");
         };
 
-        var data = stringToBytes("1");
-        var deviceId = event.target.dataset.deviceId;
-        ble.writeWithoutResponse(deviceId, blue.serviceUUID, blue.characteristicUUID, data, success, failure);
-
-    },
-	
-	sendDataOFF: function(event) { // send data to Arduino
-	    
-        var success = function() {
-            console.log("success");
-            resultDiv.innerHTML = resultDiv.innerHTML + "Sent: " + "0" + "<br/>";
-            resultDiv.scrollTop = resultDiv.scrollHeight;
-        };
-
-        var failure = function() {
-            alert("Failed writing data to the Arduino");
-        };
-
-        var data = stringToBytes("0");
+        var data = stringToBytes(msg);
         var deviceId = event.target.dataset.deviceId;
         ble.writeWithoutResponse(deviceId, blue.serviceUUID, blue.characteristicUUID, data, success, failure);
 
