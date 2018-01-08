@@ -49,7 +49,7 @@ function refreshDeviceList(){
 
 
 function onDiscoverDevice(device){
-	document.getElementById("deviceList").innerHTML+="<button id= '"+ device.id+ " 'onClick ='connect(TEST)' >"
+	document.getElementById("deviceList").innerHTML+="<button id= '"+ device.id+ " 'onClick ='test(TEST)' >"
 	+ device.name+" " +device.rssi + " " + device.id + " </button><br>";
 	/* var listItem = document.createElement('li'),
             html = '<b>' + device.name + '</b><br/>' +
@@ -61,7 +61,7 @@ function onDiscoverDevice(device){
         deviceList.appendChild(listItem); */
 }
 
-function connect(device) {
+function test(device) {
 	
 	deviceId = device;
 	document.getElementById("bleId").innerHTML = device;
