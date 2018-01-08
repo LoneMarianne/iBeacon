@@ -54,7 +54,7 @@ function onDiscoverDevice(device){
 	
 	document.getElementById("deviceList").innerHTML+="<button id= '"+ device.id+ "' >"
 	+ device.name+" " +device.rssi + " " + device.id + " </button><br>";
-	document.getElementById("deviceList").onclick = test("TEST");
+	document.getElementById("deviceList").onclick = test(id);
 	/* var listItem = document.createElement('li'),
             html = '<b>' + device.name + '</b><br/>' +
                 'RSSI: ' + device.rssi + '&nbsp;|&nbsp;' +
@@ -67,7 +67,7 @@ function onDiscoverDevice(device){
 
 function test(device) {
 	
-	//deviceId = device;
+	deviceId = device;
 	document.getElementById("bleId").innerHTML = device;
 	//var deviceId = e.target.dataset.deviceId,
           
@@ -76,7 +76,7 @@ function test(device) {
                 //disconnectButton.dataset.deviceId = deviceId;
                 //app.showDetailPage();
 
-   //  ble.connect(device, onConnect, onError);
+   ble.connect(device, onConnect, onError);
 }
 	
 function onConnect(){
