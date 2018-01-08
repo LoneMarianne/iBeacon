@@ -21,7 +21,7 @@ var blue= {
     serviceUUID: "0000FFE0-0000-1000-8000-00805F9B34FB",
     characteristicUUID: "0000FFE1-0000-1000-8000-00805F9B34FB"
 };
-var deviceId;
+deviceId;
 
 function onLoad(){
 	document.addEventListener('deviceready', this.onDeviceReady, false);
