@@ -46,11 +46,15 @@ function refreshDeviceList(){
         }
 }
 
-
+document.getElementById("deviceList").innerHTML+="<button id= '"+test+ " '>"+test +" </button><br>"; 
+document.getElementById("deviceList").onclick =vaelg(id);
 
 function onDiscoverDevice(device){
-	document.getElementById("deviceList").innerHTML+="<button id= '"+ device.id+ " 'onClick ='test(TEST)' >"
+	var id =device.id;
+	
+	document.getElementById("deviceList").innerHTML+="<button id= '"+ device.id+ "' >"
 	+ device.name+" " +device.rssi + " " + device.id + " </button><br>";
+	document.getElementById("deviceList").onclick = test("TEST");
 	/* var listItem = document.createElement('li'),
             html = '<b>' + device.name + '</b><br/>' +
                 'RSSI: ' + device.rssi + '&nbsp;|&nbsp;' +
@@ -63,7 +67,7 @@ function onDiscoverDevice(device){
 
 function test(device) {
 	
-	deviceId = device;
+	//deviceId = device;
 	document.getElementById("bleId").innerHTML = device;
 	//var deviceId = e.target.dataset.deviceId,
           
