@@ -49,7 +49,7 @@ function refreshDeviceList(){
 
 
 function onDiscoverDevice(device){
-	document.getElementById("deviceList").innerHTML+="<button id= '"+ device.id+ " 'onClick ='connect(device.id)' >"
+	document.getElementById("deviceList").innerHTML+="<button id= '"+ device.id+ " 'onClick ='connect(TEST)' >"
 	+ device.name+" " +device.rssi + " " + device.id + " </button><br>";
 	/* var listItem = document.createElement('li'),
             html = '<b>' + device.name + '</b><br/>' +
