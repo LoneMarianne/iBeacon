@@ -64,7 +64,7 @@ function onDiscoverDevice(device){
 function connect(device) {
 	
 	deviceId = device;
-	document.getElementById("bleId").innerHTML = device.Id;
+	document.getElementById("bleId").innerHTML = device;
 	//var deviceId = e.target.dataset.deviceId,
           
 				
@@ -72,7 +72,7 @@ function connect(device) {
                 //disconnectButton.dataset.deviceId = deviceId;
                 //app.showDetailPage();
 
-     ble.connect(device, onConnect, onError);
+   //  ble.connect(device, onConnect, onError);
 }
 	
 function onConnect(){
