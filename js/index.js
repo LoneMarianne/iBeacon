@@ -64,6 +64,7 @@ function onDiscoverDevice(device){
 function connect(device) {
 	
 	deviceId = device;
+	document.getElementById("bleId").innerHTML = device.Id;
 	//var deviceId = e.target.dataset.deviceId,
           
 				
