@@ -46,8 +46,7 @@ function refreshDeviceList(){
         }
 }
 
-document.getElementById("deviceList").innerHTML+="<button id= '"+test+ " '>"+test +" </button><br>"; 
-document.getElementById("deviceList").onclick =vaelg(id);
+
 
 function onDiscoverDevice(device){
 	var id =device.id;
@@ -68,7 +67,7 @@ function onDiscoverDevice(device){
 function test(device) {
 	
 	deviceId = device;
-	document.getElementById("bleId").innerHTML = device;
+	//document.getElementById("bleId").innerHTML = device;
 	//var deviceId = e.target.dataset.deviceId,
           
 				
@@ -81,7 +80,7 @@ function test(device) {
 	
 function onConnect(){
 	document.getElementById("statusDiv").innerHTML = " Status: Connected";
-	document.getElementById("bleId").innerHTML = device.Id;
+	document.getElementById("bleId").innerHTML = deviceId;
 	 ble.startNotification(deviceId, blue.serviceUUID, blue.characteristicUUID, onData, onError);
 }
  function onData(data){ // data received from Arduino
