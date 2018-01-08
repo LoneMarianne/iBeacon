@@ -21,10 +21,10 @@ var blue= {
     serviceUUID: "0000FFE0-0000-1000-8000-00805F9B34FB",
     characteristicUUID: "0000FFE1-0000-1000-8000-00805F9B34FB"
 };
-deviceId;
+var deviceId;
 
 function onLoad(){
-	document.addEventListener('deviceready', this.onDeviceReady, false);
+	document.addEventListener('deviceready', onDeviceReady, false);
        // refreshButton.addEventListener('touchstart', this.refreshDeviceList, false);
        // sendButton.addEventListener('click', this.sendData, false);
       //  disconnectButton.addEventListener('touchstart', this.disconnect, false);
@@ -34,6 +34,8 @@ function onLoad(){
 function onDeviceReady(){
 	refreshDeviceList();
 }
+
+	 
 function refreshDeviceList(){
 	document.getElementById("deviceList").innerHTML = ''; // empties the list
         if (cordova.platformId === 'android') { // Android filtering is broken
@@ -45,9 +47,10 @@ function refreshDeviceList(){
 }
 
 
+
 function onDiscoverDevice(device){
-	document.getElementById("deviceList").innerHTML+="<li id =" + device.id+" onClick ='connect(device.id)' >"
-	+ device.name+" " +device.rssi + " " + device.id+"</li>";
+	document.getElementById("deviceList").innerHTML+="<button id= '"+ device.id+ " 'onClick ='connect(device.id)' >"
+	+ device.name+" " +device.rssi + " " + device.id + " </button><br>";
 	/* var listItem = document.createElement('li'),
             html = '<b>' + device.name + '</b><br/>' +
                 'RSSI: ' + device.rssi + '&nbsp;|&nbsp;' +
