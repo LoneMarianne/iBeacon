@@ -21,7 +21,7 @@ var blue= {
     serviceUUID: "0000FFE0-0000-1000-8000-00805F9B34FB",
     characteristicUUID: "0000FFE1-0000-1000-8000-00805F9B34FB"
 };
-var deviceId;
+var ConnDeviceId;
 
 function onLoad(){
 	document.addEventListener('deviceready', onDeviceReady, false);
@@ -49,11 +49,12 @@ function refreshDeviceList(){
 
 
 function onDiscoverDevice(device){
-	var id =device.id;
+	//var id =device.id;
 	
-	document.getElementById("deviceList").innerHTML+="<button id= '"+ device.id+ "' >"
+	document.getElementById("deviceList").innerHTML+="<button id= '"+ device.id+ "' onClick ='test(device.id)'>"
 	+ device.name+" " +device.rssi + " " + device.id + " </button><br>";
-	document.getElementById("deviceList").onclick = test(id);
+	//document.getElementById("deviceList").innerHTML+="<button id= '"+test+ "' onClick ='vaelg(id)' >"+test +" </button><br>";
+	//document.getElementById("deviceList").onclick = test(id);
 	/* var listItem = document.createElement('li'),
             html = '<b>' + device.name + '</b><br/>' +
                 'RSSI: ' + device.rssi + '&nbsp;|&nbsp;' +
@@ -66,8 +67,8 @@ function onDiscoverDevice(device){
 
 function test(device) {
 	
-	deviceId = device;
-	document.getElementById("debugDiv").innerHTML += "test"+ deviceId;
+	ConnDeviceId = device;
+	document.getElementById("debugDiv").innerHTML 	= "test"+ ConnDeviceId;
 	//document.getElementById("bleId").innerHTML = device;
 	//var deviceId = e.target.dataset.deviceId,
           
@@ -76,16 +77,22 @@ function test(device) {
                 //disconnectButton.dataset.deviceId = deviceId;
                 //app.showDetailPage();
 
-   ble.connect(device, onConnect, onError);
+   ble.connect(device, onConnect, onConnError);
 }
 	
 function onConnect(){
 	document.getElementById("statusDiv").innerHTML = " Status: Connected";
-	document.getElementById("bleId").innerHTML = deviceId;
-	 ble.startNotification(deviceId, blue.serviceUUID, blue.characteristicUUID, onData, onError);
+	document.getElementById("bleId").innerHTML = ConnDeviceId;
+	 ble.startNotification(ConnDeviceId, blue.serviceUUID, blue.characteristicUUID, onData, onError);
 }
+
+function onConnError(){
+	alert("Problem connecting)
+	document.getElementById("statusDiv").innerHTML = " Status: Disonnected";
+}
+
  function onData(data){ // data received from Arduino
-	console.log(data);
+	//console.log(data);
 	document.getElementById("resultDiv").innerHTML +=  "Received: " + bytesToString(data) + "<br/>";
    // resultDiv.scrollTop = resultDiv.scrollHeight;
 }
