@@ -29,7 +29,7 @@ function onLoad(){
        // refreshButton.addEventListener('touchstart', this.refreshDeviceList, false);
        // sendButton.addEventListener('click', this.sendData, false);
       //  disconnectButton.addEventListener('touchstart', this.disconnect, false);
-     	document.getElementById("bleDeviceList").addEventListener('touchstart', conn, false); // assume not scrolling
+     	  bleDeviceList.addEventListener('touchstart', this.connect, false); // assume not scrolling
 	
 	
 }
