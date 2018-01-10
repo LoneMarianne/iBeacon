@@ -7,7 +7,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">	
 		<script type="text/javascript" src="cordova.js"></script> 
         <script type="text/javascript" src="js/index.js"></script>
-        <title>Bluetooth Chat</title>
+        <title>IBeacon</title>
     </head>
      <body onload="onLoad()">
        
@@ -18,7 +18,7 @@
 		 <ul id="bleDeviceList">
                 </ul>
           
-			
+			<button id = "ble1"  onclick = "conn()">  </button>
 			<button id="refreshButton" onClick = "refreshDeviceList()">Refresh</button>
 
 			<div id="statusDiv">Status: Disconnected</div>

@@ -59,19 +59,20 @@ function onDiscoverDevice(device){
        // listItem.dataset.deviceId = device.id;
         listItem.innerHTML = html;
         	document.getElementById("bleDeviceList").appendChild(listItem);
-	
+	document.getElementById("ble1").innerHTML = device[0].name;
 }
 
 
 
-function conn(e){
-	 n= e.srcElement.innerHTML;
+function conn(){
+	 n= event.srcElement.innerHTML;
+	 document.getElementById("debugDiv").innerHTML += "Ok" + n;
 	// document.getElementById("tjo").innerHTML = event.srcElement.innerHTML;
 	 // alert(event.srcElement.id);
 	 for(i=0;i<device.length;i++)
 		 if(device[i].name ==n) ConnDeviceId= device[i].id;
 	 else ConnDeviceId="Ikke fundet";
-	document.getElementById("debugDiv").innerHTML 	= "test : "+ ConnDeviceId;
+	document.getElementById("debugDiv").innerHTML 	+= "test : "+ ConnDeviceId;
  }
 
 
