@@ -30,7 +30,7 @@ function onLoad(){
        // sendButton.addEventListener('click', this.sendData, false);
       //  disconnectButton.addEventListener('touchstart', this.disconnect, false);
       //  deviceList.addEventListener('touchstart', this.connect, false); // assume not scrolling
-	  ble1.hidden = true;
+	
 	document.getElementById("ble1").hidden = true;
 	document.getElementById("ble2").hidden = true;
 	document.getElementById("ble3").hidden = true;
