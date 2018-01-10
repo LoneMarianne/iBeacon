@@ -69,9 +69,10 @@ function conn(){
 	 document.getElementById("debugDiv").innerHTML += "Ok" + n;
 	// document.getElementById("tjo").innerHTML = event.srcElement.innerHTML;
 	 // alert(event.srcElement.id);
-	 for(i=0;i<device.length;i++)
-		 if(device[i].name ==n) ConnDeviceId= device[i].id;
-	 else ConnDeviceId="Ikke fundet";
+	 for(i=0;i<deviceList.length;i++){
+		 if(deviceList[i].name ==n) ConnDeviceId= deviceList[i].id;
+			else ConnDeviceId="Ikke fundet";
+	 }
 	document.getElementById("debugDiv").innerHTML 	+= "test : "+ ConnDeviceId;
  }
 
