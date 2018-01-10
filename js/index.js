@@ -22,13 +22,17 @@ var blue= {
     characteristicUUID: "0000FFE1-0000-1000-8000-00805F9B34FB"
 };
 var ConnDeviceId;
-
+ var deviceList =[];
+ 
 function onLoad(){
 	document.addEventListener('deviceready', onDeviceReady, false);
        // refreshButton.addEventListener('touchstart', this.refreshDeviceList, false);
        // sendButton.addEventListener('click', this.sendData, false);
       //  disconnectButton.addEventListener('touchstart', this.disconnect, false);
       //  deviceList.addEventListener('touchstart', this.connect, false); // assume not scrolling
+	document.getElementById("ble1").style.visibility = "hidden";
+	document.getElementById("ble2").style.visibility = "hidden";
+	document.getElementById("ble3").style.visibility = "hidden"; 
 }
 
 function onDeviceReady(){
@@ -49,21 +53,35 @@ function refreshDeviceList(){
 
 
 function onDiscoverDevice(device){
-	//var id =device.id;
+	deviceList.push(device);
+	deviceShow();
 	
-	document.getElementById("deviceList").innerHTML+="<button id= '"+ device.id+ "' onClick ='test(device.id)'>"
-	+ device.name+" " +device.rssi + " " + device.id + " </button><br>";
-	//document.getElementById("deviceList").innerHTML+="<button id= '"+test+ "' onClick ='vaelg(id)' >"+test +" </button><br>";
-	//document.getElementById("deviceList").onclick = test(id);
-	/* var listItem = document.createElement('li'),
-            html = '<b>' + device.name + '</b><br/>' +
-                'RSSI: ' + device.rssi + '&nbsp;|&nbsp;' +
-                device.id;
-
-        listItem.dataset.deviceId = device.id;
-        listItem.innerHTML = html;
-        deviceList.appendChild(listItem); */
 }
+
+function deviceShow(){
+	if(device.length ==1){
+		  document.getElementById("ble1").innerHTML = device[0].name;
+		document.getElementById("ble1").style.visibility = "visible";
+	}
+	else if(device.length ==2){
+	  document.getElementById("ble2").innerHTML = device[1].name;
+		document.getElementById("ble2").style.visibility = "visible";
+	}
+	else if(device.length ==3){
+	  document.getElementById("ble3").innerHTML = device[2].name;
+		document.getElementById("ble3").style.visibility = "visible";
+	}
+}
+
+function conn(){
+	 n= event.srcElement.innerHTML;
+	// document.getElementById("tjo").innerHTML = event.srcElement.innerHTML;
+	 // alert(event.srcElement.id);
+	 for(i=0;i<device.length;i++)
+		 if(device[i].name ==n) ConnDeviceId= device[i].id;
+	 else ConnDeviceId="Ikke fundet";
+	document.getElementById("debugDiv").innerHTML 	= "test : "+ ConnDeviceId;
+ }
 
 function test(device) {
 	
