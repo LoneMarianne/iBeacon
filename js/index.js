@@ -42,7 +42,7 @@ function onDeviceReady(){
 
 	 
 function refreshDeviceList(){
-	document.getElementById("deviceList").innerHTML = ''; // empties the list
+	//document.getElementById("deviceList").innerHTML = ''; // empties the list
         if (cordova.platformId === 'android') { // Android filtering is broken
             ble.scan([], 5, onDiscoverDevice, onError);
         } else {
