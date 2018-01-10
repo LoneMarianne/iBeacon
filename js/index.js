@@ -56,6 +56,7 @@ function onDiscoverDevice(device){
 
 
 function conn(){
+	document.getElementById("debugDiv").innerHTML ="";
 	 n= event.srcElement.innerHTML;
 	 document.getElementById("debugDiv").innerHTML += "Ok" + n;
 	 for(i=0;i<deviceList.length;i++){
@@ -81,8 +82,13 @@ function onConnError(){
 	document.getElementById("receiveDiv").innerHTML =  "Received: " + bytesToString(data) + "<br/>";
 }
 
-function sendData(txt) { // send data to Arduino
-	var data = stringToBytes(txt);
+function data(txt){
+	messageInput.value = txt;
+	//sendData();
+}	
+
+function sendData() { // send data to Arduino
+	 var data = stringToBytes(messageInput.value);
 	ble.writeWithoutResponse(ConnDeviceId, blue.serviceUUID, blue.characteristicUUID, data, onSend, onError);
 }
 	
