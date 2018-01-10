@@ -30,9 +30,10 @@ function onLoad(){
        // sendButton.addEventListener('click', this.sendData, false);
       //  disconnectButton.addEventListener('touchstart', this.disconnect, false);
       //  deviceList.addEventListener('touchstart', this.connect, false); // assume not scrolling
-	document.getElementById("ble1").style.visibility = "hidden";
-	document.getElementById("ble2").style.visibility = "hidden";
-	document.getElementById("ble3").style.visibility = "hidden"; 
+	  ble1.hidden = true;
+	document.getElementById("ble1").hidden = true;
+	document.getElementById("ble2").hidden = true;
+	document.getElementById("ble3").hidden = true;
 }
 
 function onDeviceReady(){
@@ -61,15 +62,15 @@ function onDiscoverDevice(device){
 function deviceShow(){
 	if(device.length ==1){
 		  document.getElementById("ble1").innerHTML = device[0].name;
-		document.getElementById("ble1").style.visibility = "visible";
+		document.getElementById("ble1").hidden = false;
 	}
 	else if(device.length ==2){
 	  document.getElementById("ble2").innerHTML = device[1].name;
-		document.getElementById("ble2").style.visibility = "visible";
+		document.getElementById("ble2").hidden = false;
 	}
 	else if(device.length ==3){
 	  document.getElementById("ble3").innerHTML = device[2].name;
-		document.getElementById("ble3").style.visibility = "visible";
+		document.getElementById("ble3").hidden = false;
 	}
 }
 
