@@ -54,12 +54,12 @@ function refreshDeviceList(){
 function onDiscoverDevice(device){
 	deviceList.push(device);
 	var listItem = document.createElement('li'),
-            html = '<b>' + device.name + '</b>';
+            html = device.name;
 
        // listItem.dataset.deviceId = device.id;
         listItem.innerHTML = html;
         	document.getElementById("bleDeviceList").appendChild(listItem);
-	document.getElementById("ble1").innerHTML = device[0].name;
+
 }
 
 
