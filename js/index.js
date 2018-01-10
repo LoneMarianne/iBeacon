@@ -29,7 +29,7 @@ function onLoad(){
        // refreshButton.addEventListener('touchstart', this.refreshDeviceList, false);
        // sendButton.addEventListener('click', this.sendData, false);
       //  disconnectButton.addEventListener('touchstart', this.disconnect, false);
-      //  deviceList.addEventListener('touchstart', this.connect, false); // assume not scrolling
+     	document.getElementById("bleDeviceList").addEventListener('touchstart', conn, false); // assume not scrolling
 	
 	document.getElementById("ble1").hidden = true;
 	document.getElementById("ble2").hidden = true;
@@ -42,7 +42,7 @@ function onDeviceReady(){
 
 	 
 function refreshDeviceList(){
-	//document.getElementById("deviceList").innerHTML = ''; // empties the list
+	document.getElementById("bleDeviceList").innerHTML = ''; // empties the list
         if (cordova.platformId === 'android') { // Android filtering is broken
             ble.scan([], 5, onDiscoverDevice, onError);
         } else {
@@ -55,27 +55,19 @@ function refreshDeviceList(){
 
 function onDiscoverDevice(device){
 	deviceList.push(device);
-	deviceShow();
+	var listItem = document.createElement('li'),
+            html = '<b>' + device.name + '</b>';
+
+       // listItem.dataset.deviceId = device.id;
+        listItem.innerHTML = html;
+        	document.getElementById("bleDeviceList").appendChild(listItem);
 	
 }
 
-function deviceShow(){
-	if(device.length ==1){
-		  document.getElementById("ble1").innerHTML = device[0].name;
-		document.getElementById("ble1").hidden = false;
-	}
-	else if(device.length ==2){
-	  document.getElementById("ble2").innerHTML = device[1].name;
-		document.getElementById("ble2").hidden = false;
-	}
-	else if(device.length ==3){
-	  document.getElementById("ble3").innerHTML = device[2].name;
-		document.getElementById("ble3").hidden = false;
-	}
-}
 
-function conn(){
-	 n= event.srcElement.innerHTML;
+
+function conn(e){
+	 n= e.srcElement.innerHTML;
 	// document.getElementById("tjo").innerHTML = event.srcElement.innerHTML;
 	 // alert(event.srcElement.id);
 	 for(i=0;i<device.length;i++)
@@ -84,20 +76,7 @@ function conn(){
 	document.getElementById("debugDiv").innerHTML 	= "test : "+ ConnDeviceId;
  }
 
-function test(device) {
-	
-	ConnDeviceId = device;
-	document.getElementById("debugDiv").innerHTML 	= "test"+ ConnDeviceId;
-	//document.getElementById("bleId").innerHTML = device;
-	//var deviceId = e.target.dataset.deviceId,
-          
-				
-                //sendButton.dataset.deviceId = deviceId;
-                //disconnectButton.dataset.deviceId = deviceId;
-                //app.showDetailPage();
 
-   ble.connect(device, onConnect, onConnError);
-}
 	
 function onConnect(){
 	document.getElementById("statusDiv").innerHTML = " Status: Connected";
