@@ -21,17 +21,13 @@ var blue= {
     serviceUUID: "0000FFE0-0000-1000-8000-00805F9B34FB",
     characteristicUUID: "0000FFE1-0000-1000-8000-00805F9B34FB"
 };
+
 var ConnDeviceId;
- var deviceList =[];
+var deviceList =[];
  
 function onLoad(){
 	document.addEventListener('deviceready', onDeviceReady, false);
-       // refreshButton.addEventListener('touchstart', this.refreshDeviceList, false);
-       // sendButton.addEventListener('click', this.sendData, false);
-      //  disconnectButton.addEventListener('touchstart', this.disconnect, false);
-      bleDeviceList.addEventListener('touchstart', this.conn, false); // assume not scrolling
-	
-	
+     bleDeviceList.addEventListener('touchstart', this.conn, false); // assume not scrolling
 }
 
 function onDeviceReady(){
@@ -41,48 +37,39 @@ function onDeviceReady(){
 	 
 function refreshDeviceList(){
 	document.getElementById("bleDeviceList").innerHTML = ''; // empties the list
-        if (cordova.platformId === 'android') { // Android filtering is broken
-            ble.scan([], 5, onDiscoverDevice, onError);
-        } else {
-			//alert("Disconnected");
-            ble.scan([blue.serviceUUID], 5, onDiscoverDevice, onError);
-        }
+	if (cordova.platformId === 'android') { // Android filtering is broken
+		ble.scan([], 5, onDiscoverDevice, onError);
+	} else {
+		//alert("Disconnected");
+		ble.scan([blue.serviceUUID], 5, onDiscoverDevice, onError);
+	}
 }
-
 
 
 function onDiscoverDevice(device){
 	deviceList.push(device);
 	var listItem = document.createElement('li'),
             html = device.name;
-
-       // listItem.dataset.deviceId = device.id;
         listItem.innerHTML = html;
         	document.getElementById("bleDeviceList").appendChild(listItem);
-
 }
-
 
 
 function conn(){
 	 n= event.srcElement.innerHTML;
 	 document.getElementById("debugDiv").innerHTML += "Ok" + n;
-	// document.getElementById("tjo").innerHTML = event.srcElement.innerHTML;
-	 // alert(event.srcElement.id);
 	 for(i=0;i<deviceList.length;i++){
 		 if(deviceList[i].name ==n) ConnDeviceId= deviceList[i].id;
 			else ConnDeviceId="Ikke fundet";
 	 }
 	document.getElementById("debugDiv").innerHTML 	+= "test : "+ ConnDeviceId;
-	 ble.connect(ConnDeviceId, onConnect, onConnError);
+	ble.connect(ConnDeviceId, onConnect, onConnError);
  }
-
-
-	
+ 
 function onConnect(){
 	document.getElementById("statusDiv").innerHTML = " Status: Connected";
 	document.getElementById("bleId").innerHTML = ConnDeviceId;
-	 ble.startNotification(ConnDeviceId, blue.serviceUUID, blue.characteristicUUID, onData, onError);
+	ble.startNotification(ConnDeviceId, blue.serviceUUID, blue.characteristicUUID, onData, onError);
 }
 
 function onConnError(){
@@ -91,34 +78,19 @@ function onConnError(){
 }
 
  function onData(data){ // data received from Arduino
-	//console.log(data);
-	document.getElementById("resultDiv").innerHTML +=  "Received: " + bytesToString(data) + "<br/>";
-   // resultDiv.scrollTop = resultDiv.scrollHeight;
+	document.getElementById("receiveDiv").innerHTML =  "Received: " + bytesToString(data) + "<br/>";
 }
+
 function sendData() { // send data to Arduino
-/*
-	var success = function() {
-		console.log("success");
-		resultDiv.innerHTML = resultDiv.innerHTML + "Sent: " + messageInput.value + "<br/>";
-		resultDiv.scrollTop = resultDiv.scrollHeight;
-	};
-
-	var failure = function() {
-		alert("Failed writing data to the redbear hardware");
-	};*/
-
 	var data = stringToBytes(messageInput.value);
-	//var deviceId = event.target.dataset.deviceId;
 	ble.writeWithoutResponse(ConnDeviceId, blue.serviceUUID, blue.characteristicUUID, data, onSend, onError);
-
 }
 	
 function onSend(){
-	document.getElementById("resultDiv").innerHTML += "Sent: " + messageInput.value + "<br/>";
+	document.getElementById("sendDiv").innerHTML = "Sent: " + messageInput.value + "<br/>";
 }
 
 function disconnect() {
-   // var deviceId = event.target.dataset.deviceId;
 	ble.disconnect(deviceId, onDisconnect, onError);
 }
 
