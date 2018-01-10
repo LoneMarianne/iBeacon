@@ -81,8 +81,8 @@ function onConnError(){
 	document.getElementById("receiveDiv").innerHTML =  "Received: " + bytesToString(data) + "<br/>";
 }
 
-function sendData() { // send data to Arduino
-	var data = stringToBytes(messageInput.value);
+function sendData(txt) { // send data to Arduino
+	var data = stringToBytes(txt);
 	ble.writeWithoutResponse(ConnDeviceId, blue.serviceUUID, blue.characteristicUUID, data, onSend, onError);
 }
 	
