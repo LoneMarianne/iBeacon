@@ -31,9 +31,7 @@ function onLoad(){
       //  disconnectButton.addEventListener('touchstart', this.disconnect, false);
      	document.getElementById("bleDeviceList").addEventListener('touchstart', conn, false); // assume not scrolling
 	
-	document.getElementById("ble1").hidden = true;
-	document.getElementById("ble2").hidden = true;
-	document.getElementById("ble3").hidden = true;
+	
 }
 
 function onDeviceReady(){
@@ -85,7 +83,7 @@ function onConnect(){
 }
 
 function onConnError(){
-	alert("Problem connecting)
+	alert("Problem connecting");
 	document.getElementById("statusDiv").innerHTML = " Status: Disonnected";
 }
 
