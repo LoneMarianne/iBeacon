@@ -74,6 +74,7 @@ function conn(){
 			else ConnDeviceId="Ikke fundet";
 	 }
 	document.getElementById("debugDiv").innerHTML 	+= "test : "+ ConnDeviceId;
+	 ble.connect(ConnDeviceId, onConnect, onConnError);
  }
 
 
@@ -108,7 +109,7 @@ function sendData() { // send data to Arduino
 
 	var data = stringToBytes(messageInput.value);
 	//var deviceId = event.target.dataset.deviceId;
-	ble.writeWithoutResponse(deviceId, blue.serviceUUID, blue.characteristicUUID, data, onSend, onError);
+	ble.writeWithoutResponse(ConnDeviceId, blue.serviceUUID, blue.characteristicUUID, data, onSend, onError);
 
 }
 	
