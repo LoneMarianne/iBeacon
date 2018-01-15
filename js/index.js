@@ -60,7 +60,7 @@ function conn(){
 	document.getElementById("debugDiv").innerHTML ="";
 	var  deviceTouch= event.srcElement.innerHTML;
 	document.getElementById("debugDiv").innerHTML += "Ok " + deviceTouch;
-	var deviceTouchArr = deviceTouch(" ");
+	var deviceTouchArr = deviceTouch.split(" ");
 	ConnDeviceId = deviceTouchArr[1];
 	
 	 /*
