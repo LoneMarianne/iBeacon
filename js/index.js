@@ -36,7 +36,7 @@ function onDeviceReady(){
 
 	 
 function refreshDeviceList(){
-	deviceList =[];
+	//deviceList =[];
 	document.getElementById("bleDeviceList").innerHTML = ''; // empties the list
 	if (cordova.platformId === 'android') { // Android filtering is broken
 		ble.scan([], 5, onDiscoverDevice, onError);
@@ -48,7 +48,7 @@ function refreshDeviceList(){
 
 
 function onDiscoverDevice(device){
-	deviceList.push(device);
+	//deviceList.push(device);
 	var listItem = document.createElement('li'),
             html = device.name+ " " + device.id;
         listItem.innerHTML = html;
@@ -58,14 +58,18 @@ function onDiscoverDevice(device){
 
 function conn(){
 	document.getElementById("debugDiv").innerHTML ="";
-	 n = event.srcElement.innerHTML;
-	 document.getElementById("debugDiv").innerHTML += "Ok " + n;
+	var  deviceTouch= event.srcElement.innerHTML;
+	document.getElementById("debugDiv").innerHTML += "Ok " + deviceTouch +"<br>";
+	var deviceTouchArr = deviceTouch(" ");
+	ConnDeviceId = deviceTouchArr[1];
+	
+	 /*
 	 for(i=0;i<deviceList.length;i++){
 		 if(deviceList[i].name ==n) {
 		  ConnDeviceId= deviceList[i].id;
 		 }
 		 else ConnDeviceId="Ikke fundet";
-	 }
+	 }*/
 	document.getElementById("debugDiv").innerHTML 	+= " test : "+ ConnDeviceId;
 	ble.connect(ConnDeviceId, onConnect, onConnError);
  }
