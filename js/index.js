@@ -50,7 +50,7 @@ function refreshDeviceList(){
 function onDiscoverDevice(device){
 	deviceList.push(device);
 	var listItem = document.createElement('li'),
-            html = device.name;
+            html = device.name+ " " + device.id;
         listItem.innerHTML = html;
         	document.getElementById("bleDeviceList").appendChild(listItem);
 }
