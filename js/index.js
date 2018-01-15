@@ -27,7 +27,7 @@ var deviceList =[];
  
 function onLoad(){
 	document.addEventListener('deviceready', onDeviceReady, false);
-     bleDeviceList.addEventListener('touchstart', this.conn, false); // assume not scrolling
+     bleDeviceList.addEventListener('touchstart', conn, false); // assume not scrolling
 }
 
 function onDeviceReady(){
@@ -57,8 +57,8 @@ function onDiscoverDevice(device){
 
 function conn(){
 	document.getElementById("debugDiv").innerHTML ="";
-	 n= event.srcElement.innerHTML;
-	 document.getElementById("debugDiv").innerHTML += "Ok" + n;
+	 n = event.srcElement.innerHTML;
+	 document.getElementById("debugDiv").innerHTML += "Ok " + n;
 	 for(i=0;i<deviceList.length;i++){
 		 if(deviceList[i].name ==n) ConnDeviceId= deviceList[i].id;
 			else ConnDeviceId="Ikke fundet";
