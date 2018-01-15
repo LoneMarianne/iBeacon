@@ -59,7 +59,7 @@ function onDiscoverDevice(device){
 function conn(){
 	document.getElementById("debugDiv").innerHTML ="";
 	var  deviceTouch= event.srcElement.innerHTML;
-	document.getElementById("debugDiv").innerHTML += "Ok " + deviceTouch +"<br>";
+	document.getElementById("debugDiv").innerHTML += "Ok " + deviceTouch;
 	var deviceTouchArr = deviceTouch(" ");
 	ConnDeviceId = deviceTouchArr[1];
 	
